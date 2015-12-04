@@ -11,6 +11,8 @@ SOURCE_LIST += $(wildcard $(LOCAL_PATH)/groupsock/*.c)
 SOURCE_LIST += $(wildcard $(LOCAL_PATH)/liveMedia/*.cpp)
 SOURCE_LIST += $(wildcard $(LOCAL_PATH)/liveMedia/*.c)
 SOURCE_LIST += $(wildcard $(LOCAL_PATH)/UsageEnvironment/*.cpp)
+SOURCE_LIST += $(wildcard $(LOCAL_PATH)/mediaServer/*.cpp)
+SOURCE_LIST += $(wildcard $(LOCAL_PATH)/mediaServer/*.c)
 
 LOCAL_SRC_FILES := $(SOURCE_LIST)
 
@@ -22,5 +24,39 @@ LOCAL_C_INCLUDES := BasicUsageEnvironment/include \
 
 LOCAL_CPPFLAGS += -fexceptions -DXLOCALE_NOT_USED=1 -DNULL=0 -DNO_SSTREAM=1 -UIP_ADD_SOURCE_MEMBERSHIP
 
-include $(BUILD_SHARED_LIBRARY) 
+LOCAL_CFLAGS += -pie -fPIE
+LOCAL_LDFLAGS += -pie -fPIE
+
+include $(BUILD_EXECUTABLE) 
+
+
+
+
+
+#include $(BUILD_SHARED_LIBRARY) 
+#include $(BUILD_STATIC_LIBRARY) 
+
+
+
+#include $(CLEAR_VARS)
+
+#LOCAL_MODULE := live555server
+
+#SOURCE_LIST := $(wildcard $(LOCAL_PATH)/mediaServer/*.cpp)
+#SOURCE_LIST += $(wildcard $(LOCAL_PATH)/mediaServer/*.c)
+
+
+#LOCAL_SRC_FILES := $(SOURCE_LIST)
+
+#LOCAL_C_INCLUDES := BasicUsageEnvironment/include \
+					#liveMedia/include \
+					#groupsock/include \
+					#UsageEnvironment/include 
+					
+#LOCAL_CPPFLAGS += -fexceptions -DXLOCALE_NOT_USED=1 -DNULL=0 -DNO_SSTREAM=1 -UIP_ADD_SOURCE_MEMBERSHIP
+#LOCAL_STATIC_LIBRARIES := live555
+
+#include $(BUILD_EXECUTABL) 
+
+#include $(call all-makefiles-under,$(LOCAL_PATH))
 
